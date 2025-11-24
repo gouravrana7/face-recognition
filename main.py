@@ -8,7 +8,7 @@ cam.set(4,480)  #height
 
 face_detector = cv2.CascadeClassifier('haarcascade_frontalface_default.xml')
 
-face_id = input('enter name')
+face_id = input('Please enter your name : ')
 dataset_root = "dataset"
 person_dir = os.path.join(dataset_root, face_id)
 os.makedirs(person_dir, exist_ok=True)
