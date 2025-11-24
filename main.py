@@ -9,9 +9,16 @@ cam.set(4,480)  #height
 face_detector = cv2.CascadeClassifier('haarcascade_frontalface_default.xml')
 
 face_id = input('enter name')
+dataset_root = "dataset"
+person_dir = os.path.join(dataset_root, face_id)
+os.makedirs(person_dir, exist_ok=True)
+
 count = 0
 while(True):
     ret, img = cam.read()
+    if not ret or img is None:
+        print("Failed to capture frame; exiting.")
+        break
     gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
     faces = face_detector.detectMultiScale(gray,1.3,5)
 
@@ -19,7 +26,8 @@ while(True):
         cv2.rectangle(img, (x,y), (x+w,y+h), (255,0,0), 2)
         count += 1
 
-        cv2.imwrite("dataset/" + str(face_id)  + str(count) + ".jpg", gray[y:y+h,x:x+w])
+        filename = f"{face_id}_{count}.jpg"
+        cv2.imwrite(os.path.join(person_dir, filename), gray[y:y+h, x:x+w])
 
         cv2.imshow('image', img)
 
