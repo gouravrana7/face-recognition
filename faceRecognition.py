@@ -66,9 +66,10 @@ while True:
                 print("Unknown Person")
                 cv2.imwrite("unKnown.jpg",im)
                 cnt=0
+    cv2.putText(im, 'Press q or ESC to exit', (10, 25), cv2.FONT_HERSHEY_SIMPLEX, 0.7, (0, 255, 255), 2)
     cv2.imshow('FaceRecognition', im)
-    key = cv2.waitKey(10)
-    if key == 27:
+    key = cv2.waitKey(10) & 0xFF
+    if key in (27, ord('q')):
         break
 
 webcam.release()
