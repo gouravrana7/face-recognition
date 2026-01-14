@@ -12,7 +12,7 @@ datasets = 'dataset'
 width, height = 130, 100
 log_file = 'recognition_log.xlsx'
 
-
+#
 def append_log(name: str, confidence: float | None):
     if not os.path.exists(log_file):
         wb = Workbook()
