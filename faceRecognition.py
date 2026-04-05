@@ -62,11 +62,13 @@ def append_log(name: str, confidence: float | None, log_path: str = LOG_FILE) ->
         else:
             wb = load_workbook(log_path)
             ws = wb.active
-        ws.append([
-            datetime.now().isoformat(timespec="seconds"),
-            name,
-            confidence if confidence is not None else "",
-        ])
+        ws.append(
+            [
+                datetime.now().isoformat(timespec="seconds"),
+                name,
+                confidence if confidence is not None else "",
+            ]
+        )
         wb.save(log_path)
     except OSError as exc:
         logger.error("Failed to write recognition log: %s", exc)
@@ -118,9 +120,7 @@ def _run_recognition_loop(
 
         for x, y, w, h in faces:
             cv2.rectangle(frame, (x, y), (x + w, y + h), COLOR_GREEN, RECT_THICKNESS)
-            resized_face = cv2.resize(
-                gray[y : y + h, x : x + w], (FACE_WIDTH, FACE_HEIGHT)
-            )
+            resized_face = cv2.resize(gray[y : y + h, x : x + w], (FACE_WIDTH, FACE_HEIGHT))
             label, raw_conf = model.predict(resized_face)
             conf = float(raw_conf)
 
@@ -182,17 +182,13 @@ def main() -> None:
 
     face_cascade = cv2.CascadeClassifier(HAAR_FILE)
     if face_cascade.empty():
-        raise SystemExit(
-            f"Failed to load Haar cascade from '{HAAR_FILE}'. Check the file path."
-        )
+        raise SystemExit(f"Failed to load Haar cascade from '{HAAR_FILE}'. Check the file path.")
 
     logger.info("Training model...")
     images, labels, names = _load_training_data(DATASETS_DIR)
 
     if len(images) == 0:
-        raise SystemExit(
-            "No training images found in dataset. Run main.py to create some first."
-        )
+        raise SystemExit("No training images found in dataset. Run main.py to create some first.")
 
     model = cv2.face.LBPHFaceRecognizer_create()
     model.train(images, labels)
