@@ -2,9 +2,8 @@ import cv2
 import os
 
 cam = cv2.VideoCapture(0)
-#cam = cv2.VideoCapture(0,cv2.CAP_DSHOW)
-cam.set(3,640) #width
-cam.set(4,480)  #height
+cam.set(3, 640)  # width
+cam.set(4, 480)  # height
 
 face_detector = cv2.CascadeClassifier('haarcascade_frontalface_default.xml')
 
@@ -38,5 +37,4 @@ while(True):
         break
 print("exiting")
 cam.release()
-#cv2.cam.release()
 cv2.destroyAllWindows()

@@ -8,3 +8,7 @@ wheels/
 
 # Virtual environments
 .venv
+
+# Generated output files (may contain PII)
+recognition_log.xlsx
+unKnown.jpg

@@ -1,5 +1,4 @@
 import os
-import time
 from datetime import datetime
 
 import cv2
@@ -30,7 +29,6 @@ if not hasattr(cv2, "face"):
 
 print('Training...')
 images, labels, names = [], [], {}
-last_log_time = {}
 logged_once = False
 
 for person_id, subdir in enumerate(sorted(os.listdir(datasets))):
@@ -53,7 +51,6 @@ if not images:
 images = np.array(images)
 labels = np.array(labels)
 model = cv2.face.LBPHFaceRecognizer_create()
-#model =  cv2.face.FisherFaceRecognizer_create()
 
 model.train(images, labels)
 
