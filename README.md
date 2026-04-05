@@ -3,7 +3,6 @@
 ![Python](https://img.shields.io/badge/python-3.12-blue?logo=python)
 ![OpenCV](https://img.shields.io/badge/opencv--contrib-4.x-green?logo=opencv)
 ![uv](https://img.shields.io/badge/package_manager-uv-violet)
-![License](https://img.shields.io/badge/license-MIT-lightgrey)
 
 A real-time face recognition system using OpenCV's **LBPH (Local Binary Pattern Histogram)** algorithm and a Haar cascade face detector. Collect face samples from your webcam, train the model, and run live recognition — all in two commands.
 
